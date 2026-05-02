@@ -13,6 +13,7 @@ def find_player_id(name):
     return None
 # Function to get players stats
 def get_player_stats (name, season):
+
     # Check if player id is valid
     player_id = find_player_id(name)
 
@@ -33,5 +34,13 @@ def get_player_stats (name, season):
         "reb": round(float(df["REB"].mean()), 1)
     }
 
-print(get_player_stats("LeBron James", "2024-25"))
+def compare_players(name1, name2, season):
+    stats1 = get_player_stats(name1, season)
+    stats2 = get_player_stats(name2, season)
+    
+    if "error" in stats1 or "error" in stats2:
+        return {"error": "One or more players not found"}
+    
+    return {"player1": stats1, "player2": stats2}
+
 
